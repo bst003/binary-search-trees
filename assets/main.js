@@ -13,3 +13,20 @@ const Node = (() => {
         factory,
     };
 })();
+
+const Tree = () => {
+    let tree = {
+        root: {},
+    };
+
+    const logTree = () => {
+        console.log(tree);
+    };
+
+    const buildTree = (array) => {};
+
+    return {
+        logTree,
+        buildTree,
+    };
+};
