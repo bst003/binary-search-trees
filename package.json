@@ -1,0 +1,25 @@
+{
+  "name": "binary-search-trees",
+  "version": "1.0.0",
+  "description": "The goal of this project is to test my abilities to create, modify, and traverse binary search trees using factory functions and a variety of methods.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bst003/binary-search-trees.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bst003/binary-search-trees/issues"
+  },
+  "homepage": "https://github.com/bst003/binary-search-trees#readme",
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "2.7.1"
+  }
+}
