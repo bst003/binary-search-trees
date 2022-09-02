@@ -15,7 +15,7 @@ const Node = (() => {
 })();
 
 const Tree = () => {
-    let _tree = {
+    const tree = {
         root: {},
     };
 
@@ -30,8 +30,33 @@ const Tree = () => {
         return newArray;
     };
 
+    const _subBuildTree = (array, start, end) => {
+        // console.log("sub is sarting");
+        // console.log(start);
+        // console.log(end);
+
+        if (start > end) {
+            // console.log("returnign null");
+            return null;
+        }
+
+        const middle = parseInt((start + end) / 2, 10);
+
+        const middleValue = array[middle];
+
+        const newNode = Node.factory(middleValue);
+
+        // console.log(newNode);
+
+        newNode.left = _subBuildTree(array, start, middle - 1);
+
+        newNode.right = _subBuildTree(array, middle + 1, end);
+
+        return newNode;
+    };
+
     const logTree = () => {
-        console.log(_tree);
+        console.log(tree);
     };
 
     const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -42,7 +67,7 @@ const Tree = () => {
                 false
             );
         }
-        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
         if (node.left !== null) {
             prettyPrint(
                 node.left,
@@ -53,14 +78,18 @@ const Tree = () => {
     };
 
     const buildTree = (array) => {
-        array.sort((a, b) => b - a);
-        console.log(array);
-
+        array.sort((a, b) => a - b);
         const reducedArray = _removeDuplicates(array);
+
         console.log(reducedArray);
+
+        tree.root = _subBuildTree(reducedArray, 0, reducedArray.length);
+
+        return tree.root;
     };
 
     return {
+        tree,
         logTree,
         buildTree,
         prettyPrint,
@@ -72,3 +101,7 @@ const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const newTree = Tree();
 
 newTree.buildTree(testArray);
+
+newTree.logTree();
+
+newTree.prettyPrint(newTree.tree.root);
