@@ -120,10 +120,37 @@ const Tree = () => {
         let newRoot = tree.root;
 
         while (newRoot.left || newRoot.right) {
+            console.log(newRoot.value);
             if (parsedVal > newRoot.value) {
                 if (newRoot.right.value === parsedVal) {
-                    newRoot.right = null;
-                    break;
+                    console.log(newRoot.right.value);
+
+                    // newRoot right has no child nodes
+                    if (
+                        newRoot.right.left === null &&
+                        newRoot.right.right === null
+                    ) {
+                        newRoot.right = null;
+                        break;
+                    }
+
+                    // newRoot right has both child nodes
+                    if (newRoot.right.left && newRoot.right.right) {
+                        console.log("has both children");
+                        break;
+                    }
+
+                    // newRoot right had left child node
+                    if (newRoot.right.left) {
+                        newRoot.right = newRoot.right.left;
+                        break;
+                    }
+
+                    // newRoot right had right child node
+                    if (newRoot.right.right) {
+                        newRoot.right = newRoot.right.right;
+                        break;
+                    }
                 }
 
                 newRoot = newRoot.right;
@@ -131,8 +158,33 @@ const Tree = () => {
 
             if (parsedVal < newRoot.value) {
                 if (newRoot.left.value === parsedVal) {
-                    newRoot.left = null;
-                    break;
+                    console.log(newRoot.left.value);
+                    // newRoot left has no child nodes
+                    if (
+                        newRoot.left.left === null &&
+                        newRoot.left.right === null
+                    ) {
+                        newRoot.left = null;
+                        break;
+                    }
+
+                    // newRoot left has both child nodes
+                    if (newRoot.left.left && newRoot.left.right) {
+                        console.log("has both children");
+                        break;
+                    }
+
+                    // newRoot left had left child node
+                    if (newRoot.left.left) {
+                        newRoot.left = newRoot.left.left;
+                        break;
+                    }
+
+                    // newRoot left had right child node
+                    if (newRoot.left.right) {
+                        newRoot.left = newRoot.left.right;
+                        break;
+                    }
                 }
 
                 newRoot = newRoot.left;
@@ -190,6 +242,8 @@ newTree.insertValue(2);
 
 newTree.prettyPrint(newTree.tree.root);
 
-newTree.deleteValue(2);
+newTree.logTree();
+
+newTree.deleteValue(67);
 
 newTree.prettyPrint(newTree.tree.root);
