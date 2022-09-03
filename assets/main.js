@@ -83,7 +83,7 @@ const Tree = () => {
 
         console.log(reducedArray);
 
-        tree.root = _subBuildTree(reducedArray, 0, reducedArray.length);
+        tree.root = _subBuildTree(reducedArray, 0, reducedArray.length - 1);
 
         return tree.root;
     };
@@ -93,11 +93,11 @@ const Tree = () => {
 
         const newRoot = root;
 
-        if (root.value === parsedVal) {
+        if (parsedVal === newRoot.value) {
             return;
         }
 
-        if (parsedVal > root.value) {
+        if (parsedVal > newRoot.value) {
             if (newRoot.right !== null) {
                 return insertValue(parsedVal, newRoot.right);
             }
@@ -106,7 +106,7 @@ const Tree = () => {
         }
 
         if (parsedVal < newRoot.value) {
-            if (root.left !== null) {
+            if (newRoot.left !== null) {
                 return insertValue(parsedVal, newRoot.left);
             }
             const newNode = Node.factory(value);
@@ -114,7 +114,30 @@ const Tree = () => {
         }
     };
 
-    const deleteValue = (value) => {};
+    const deleteValue = (value, root = tree.root) => {
+        const parsedVal = parseInt(value, 10);
+
+        let newRoot = root;
+
+        if (parsedVal === newRoot.value) {
+            console.log("time to delete this node");
+            console.log(newRoot);
+
+            if (newRoot.left === null && newRoot.right === null) {
+                console.log("overwriting node");
+                newRoot = null;
+                return;
+            }
+        }
+
+        if (parsedVal > newRoot.value) {
+            return deleteValue(parsedVal, newRoot.right);
+        }
+
+        if (parsedVal < newRoot.value) {
+            return deleteValue(parsedVal, newRoot.left);
+        }
+    };
 
     return {
         tree,
@@ -137,5 +160,9 @@ newTree.logTree();
 newTree.prettyPrint(newTree.tree.root);
 
 newTree.insertValue(2);
+
+newTree.prettyPrint(newTree.tree.root);
+
+newTree.deleteValue(2);
 
 newTree.prettyPrint(newTree.tree.root);
