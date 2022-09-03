@@ -20,8 +20,6 @@ const Tree = () => {
     };
 
     const _buildArrayFromNode = (node, array = []) => {
-        console.log(node);
-
         if (node === null) {
             return;
         }
@@ -130,19 +128,21 @@ const Tree = () => {
         }
     };
 
-    const deleteValue = (value) => {
+    const deleteValue = (value, node = tree.root) => {
         const parsedVal = parseInt(value, 10);
 
-        let newRoot = tree.root;
+        let newRoot = node;
 
         while (newRoot.left || newRoot.right) {
             console.log(newRoot.value);
             let dir;
-            if (parsedVal > newRoot.value) {
+            if (parsedVal > newRoot.value || parsedVal === newRoot.value) {
                 dir = "right";
             } else if (parsedVal < newRoot.value) {
                 dir = "left";
             }
+
+            console.log(dir);
 
             if (newRoot[dir].value === parsedVal) {
                 console.log(newRoot[dir].value);
@@ -156,9 +156,17 @@ const Tree = () => {
                 // newRoot dir has both child nodes
                 if (newRoot[dir].left && newRoot[dir].right) {
                     console.log("has both children right");
-                    const arrayFromNode = _buildArrayFromNode(newRoot[dir]);
+                    const arrayFromNodeRight = _buildArrayFromNode(
+                        newRoot[dir].right
+                    );
 
-                    console.log(arrayFromNode);
+                    arrayFromNodeRight.sort((a, b) => a - b);
+
+                    newRoot[dir].value = arrayFromNodeRight[0];
+
+                    deleteValue(newRoot[dir].value, newRoot[dir]);
+
+                    console.log(arrayFromNodeRight);
 
                     break;
                 }
