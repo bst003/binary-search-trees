@@ -19,6 +19,22 @@ const Tree = () => {
         root: {},
     };
 
+    const _buildArrayFromNode = (node, array = []) => {
+        console.log(node);
+
+        if (node === null) {
+            return;
+        }
+
+        array.push(node.value);
+
+        _buildArrayFromNode(node.left, array);
+
+        _buildArrayFromNode(node.right, array);
+
+        return array;
+    };
+
     const _removeDuplicates = (array) => {
         const newArray = array.reduce((previousValue, currentValue) => {
             if (previousValue.indexOf(currentValue) === -1) {
@@ -129,28 +145,31 @@ const Tree = () => {
             }
 
             if (newRoot[dir].value === parsedVal) {
-                console.log("test");
                 console.log(newRoot[dir].value);
 
-                // newRoot right has no child nodes
+                // newRoot dir has no child nodes
                 if (newRoot[dir].left === null && newRoot[dir].right === null) {
                     newRoot[dir] = null;
                     break;
                 }
 
-                // newRoot right has both child nodes
+                // newRoot dir has both child nodes
                 if (newRoot[dir].left && newRoot[dir].right) {
                     console.log("has both children right");
+                    const arrayFromNode = _buildArrayFromNode(newRoot[dir]);
+
+                    console.log(arrayFromNode);
+
                     break;
                 }
 
-                // newRoot right had left child node
+                // newRoot dir had left child node
                 if (newRoot[dir].left) {
                     newRoot[dir] = newRoot[dir].left;
                     break;
                 }
 
-                // newRoot right had right child node
+                // newRoot dir had right child node
                 if (newRoot[dir].right) {
                     newRoot[dir] = newRoot[dir].right;
                     break;
@@ -158,41 +177,6 @@ const Tree = () => {
             }
 
             newRoot = newRoot[dir];
-            // }
-
-            // if (parsedVal < newRoot.value) {
-            //     if (newRoot.left.value === parsedVal) {
-            //         console.log(newRoot.left.value);
-            //         // newRoot left has no child nodes
-            //         if (
-            //             newRoot.left.left === null &&
-            //             newRoot.left.right === null
-            //         ) {
-            //             newRoot.left = null;
-            //             break;
-            //         }
-
-            //         // newRoot left has both child nodes
-            //         if (newRoot.left.left && newRoot.left.right) {
-            //             console.log("has both children left");
-            //             break;
-            //         }
-
-            //         // newRoot left had left child node
-            //         if (newRoot.left.left) {
-            //             newRoot.left = newRoot.left.left;
-            //             break;
-            //         }
-
-            //         // newRoot left had right child node
-            //         if (newRoot.left.right) {
-            //             newRoot.left = newRoot.left.right;
-            //             break;
-            //         }
-            //     }
-
-            //     newRoot = newRoot.left;
-            // }
         }
 
         console.log(newRoot.value);
