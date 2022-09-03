@@ -88,7 +88,7 @@ const Tree = () => {
         return tree.root;
     };
 
-    const insert = (value, root = tree.root) => {
+    const insertValue = (value, root = tree.root) => {
         const parsedVal = parseInt(value, 10);
 
         const newRoot = root;
@@ -99,7 +99,7 @@ const Tree = () => {
 
         if (parsedVal > root.value) {
             if (newRoot.right !== null) {
-                return insert(parsedVal, newRoot.right);
+                return insertValue(parsedVal, newRoot.right);
             }
             const newNode = Node.factory(value);
             newRoot.right = newNode;
@@ -107,19 +107,22 @@ const Tree = () => {
 
         if (parsedVal < newRoot.value) {
             if (root.left !== null) {
-                return insert(parsedVal, newRoot.left);
+                return insertValue(parsedVal, newRoot.left);
             }
             const newNode = Node.factory(value);
             newRoot.left = newNode;
         }
     };
 
+    const deleteValue = (value) => {};
+
     return {
         tree,
         logTree,
         buildTree,
         prettyPrint,
-        insert,
+        insertValue,
+        deleteValue,
     };
 };
 
@@ -133,6 +136,6 @@ newTree.logTree();
 
 newTree.prettyPrint(newTree.tree.root);
 
-newTree.insert(2);
+newTree.insertValue(2);
 
 newTree.prettyPrint(newTree.tree.root);
