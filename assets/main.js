@@ -114,29 +114,56 @@ const Tree = () => {
         }
     };
 
-    const deleteValue = (value, root = tree.root) => {
+    const deleteValue = (value) => {
         const parsedVal = parseInt(value, 10);
 
-        let newRoot = root;
+        let newRoot = tree.root;
 
-        if (parsedVal === newRoot.value) {
-            console.log("time to delete this node");
-            console.log(newRoot);
+        while (newRoot.left || newRoot.right) {
+            if (parsedVal > newRoot.value) {
+                if (newRoot.right.value === parsedVal) {
+                    newRoot.right = null;
+                    break;
+                }
 
-            if (newRoot.left === null && newRoot.right === null) {
-                console.log("overwriting node");
-                newRoot = null;
-                return;
+                newRoot = newRoot.right;
+            }
+
+            if (parsedVal < newRoot.value) {
+                if (newRoot.left.value === parsedVal) {
+                    newRoot.left = null;
+                    break;
+                }
+
+                newRoot = newRoot.left;
             }
         }
 
-        if (parsedVal > newRoot.value) {
-            return deleteValue(parsedVal, newRoot.right);
-        }
+        console.log(newRoot.value);
 
-        if (parsedVal < newRoot.value) {
-            return deleteValue(parsedVal, newRoot.left);
-        }
+        // if (parsedVal === newRoot.value) {
+        //     console.log(newRoot.value);
+        //     newRoot.value = null;
+        // }
+
+        // if (parsedVal === newRoot.value) {
+        //     console.log("time to delete this node");
+        //     console.log(newRoot);
+
+        //     if (newRoot.left === null && newRoot.right === null) {
+        //         console.log("overwriting node");
+        //         newRoot = null;
+        //         return;
+        //     }
+        // }
+
+        // if (parsedVal > newRoot.value) {
+        //     newRoot.right = deleteValue(parsedVal, newRoot.right);
+        // }
+
+        // if (parsedVal < newRoot.value) {
+        //     newRoot.left = deleteValue(parsedVal, newRoot.left);
+        // }
     };
 
     return {
