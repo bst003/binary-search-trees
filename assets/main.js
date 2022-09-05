@@ -219,8 +219,9 @@ const Tree = () => {
 
     const levelOrder = (
         func = (value) => {
-            console.log(value);
-        }
+            valArray.push(value);
+        },
+        valArray = []
     ) => {
         const queue = [];
 
@@ -240,6 +241,10 @@ const Tree = () => {
             }
 
             queue.shift();
+        }
+
+        if (valArray.length > 0) {
+            return valArray;
         }
     };
 
@@ -277,4 +282,4 @@ newTree.prettyPrint();
 
 // console.log(newTree.findValue(3));
 
-newTree.levelOrder();
+console.log(newTree.levelOrder());
