@@ -217,6 +217,32 @@ const Tree = () => {
         return result;
     };
 
+    const levelOrder = (
+        func = (value) => {
+            console.log(value);
+        }
+    ) => {
+        const queue = [];
+
+        const newRoot = tree.root;
+
+        queue.push(newRoot);
+
+        while (queue.length !== 0) {
+            func(queue[0].value);
+
+            if (queue[0].left !== null) {
+                queue.push(queue[0].left);
+            }
+
+            if (queue[0].right !== null) {
+                queue.push(queue[0].right);
+            }
+
+            queue.shift();
+        }
+    };
+
     return {
         logTree,
         buildTree,
@@ -224,6 +250,7 @@ const Tree = () => {
         insertValue,
         deleteValue,
         findValue,
+        levelOrder,
     };
 };
 
@@ -233,7 +260,7 @@ const newTree = Tree();
 
 newTree.buildTree(testArray);
 
-newTree.logTree();
+// newTree.logTree();
 
 newTree.prettyPrint();
 
@@ -241,11 +268,13 @@ newTree.insertValue(2);
 
 newTree.prettyPrint();
 
-newTree.logTree();
+// newTree.logTree();
 
 newTree.deleteValue(67);
 // newTree.deleteValue(2);
 
 newTree.prettyPrint();
 
-console.log(newTree.findValue(3));
+// console.log(newTree.findValue(3));
+
+newTree.levelOrder();
