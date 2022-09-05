@@ -134,18 +134,18 @@ const Tree = () => {
         let newRoot = node;
 
         while (newRoot.left || newRoot.right) {
-            console.log(newRoot.value);
+            // console.log(newRoot.value);
             let dir;
-            if (parsedVal > newRoot.value || parsedVal === newRoot.value) {
+            if (parsedVal >= newRoot.value) {
                 dir = "right";
             } else if (parsedVal < newRoot.value) {
                 dir = "left";
             }
 
-            console.log(dir);
+            // console.log(dir);
 
             if (newRoot[dir].value === parsedVal) {
-                console.log(newRoot[dir].value);
+                // console.log(newRoot[dir].value);
 
                 // newRoot dir has no child nodes
                 if (newRoot[dir].left === null && newRoot[dir].right === null) {
@@ -155,7 +155,7 @@ const Tree = () => {
 
                 // newRoot dir has both child nodes
                 if (newRoot[dir].left && newRoot[dir].right) {
-                    console.log("has both children right");
+                    // console.log("has both children right");
                     const arrayFromNodeRight = _buildArrayFromNode(
                         newRoot[dir].right
                     );
@@ -166,7 +166,7 @@ const Tree = () => {
 
                     deleteValue(newRoot[dir].value, newRoot[dir]);
 
-                    console.log(arrayFromNodeRight);
+                    // console.log(arrayFromNodeRight);
 
                     break;
                 }
@@ -187,40 +187,43 @@ const Tree = () => {
             newRoot = newRoot[dir];
         }
 
-        console.log(newRoot.value);
+        // console.log(newRoot.value);
+    };
 
-        // if (parsedVal === newRoot.value) {
-        //     console.log(newRoot.value);
-        //     newRoot.value = null;
-        // }
+    const findValue = (value) => {
+        const parsedVal = parseInt(value, 10);
 
-        // if (parsedVal === newRoot.value) {
-        //     console.log("time to delete this node");
-        //     console.log(newRoot);
+        let newRoot = tree.root;
 
-        //     if (newRoot.left === null && newRoot.right === null) {
-        //         console.log("overwriting node");
-        //         newRoot = null;
-        //         return;
-        //     }
-        // }
+        let result = "Not Found";
 
-        // if (parsedVal > newRoot.value) {
-        //     newRoot.right = deleteValue(parsedVal, newRoot.right);
-        // }
+        while (newRoot.left || newRoot.right) {
+            // console.log(newRoot.value);
+            if (parsedVal === newRoot.value) {
+                result = newRoot;
+                break;
+            }
 
-        // if (parsedVal < newRoot.value) {
-        //     newRoot.left = deleteValue(parsedVal, newRoot.left);
-        // }
+            let dir;
+            if (parsedVal > newRoot.value) {
+                dir = "right";
+            } else if (parsedVal < newRoot.value) {
+                dir = "left";
+            }
+
+            newRoot = newRoot[dir];
+        }
+
+        return result;
     };
 
     return {
-        tree,
         logTree,
         buildTree,
         prettyPrint,
         insertValue,
         deleteValue,
+        findValue,
     };
 };
 
@@ -232,7 +235,7 @@ newTree.buildTree(testArray);
 
 newTree.logTree();
 
-newTree.prettyPrint(newTree.tree.root);
+newTree.prettyPrint();
 
 newTree.insertValue(2);
 
@@ -241,5 +244,8 @@ newTree.prettyPrint();
 newTree.logTree();
 
 newTree.deleteValue(67);
+// newTree.deleteValue(2);
 
 newTree.prettyPrint();
+
+console.log(newTree.findValue(3));
