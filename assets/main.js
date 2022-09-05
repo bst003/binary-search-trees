@@ -303,6 +303,38 @@ const Tree = () => {
         return valArray;
     };
 
+    const height = (node = tree.root, maxHeight = 0, tmpHeight = 0) => {
+        let newMax = maxHeight;
+        let newTmp = tmpHeight;
+
+        if (node === null) {
+            newTmp = 0;
+            return newMax;
+        }
+
+        newTmp++;
+        if (newTmp > maxHeight) {
+            newMax = newTmp;
+        }
+
+        console.log(node.value);
+        console.log(`max: ${newMax}`);
+        console.log(`tmp: ${newTmp}`);
+
+        const lftHeight = height(node.left, newMax, newTmp);
+        const rhtHeight = height(node.right, newMax, newTmp);
+
+        if (lftHeight > newMax) {
+            newMax = lftHeight;
+        }
+
+        if (rhtHeight > newMax) {
+            newMax = rhtHeight;
+        }
+
+        return newMax;
+    };
+
     return {
         logTree,
         buildTree,
@@ -314,6 +346,7 @@ const Tree = () => {
         inorder,
         preorder,
         postorder,
+        height,
     };
 };
 
@@ -328,6 +361,12 @@ newTree.buildTree(testArray);
 newTree.prettyPrint();
 
 newTree.insertValue(2);
+
+newTree.insertValue(4456);
+
+newTree.insertValue(9999);
+
+newTree.insertValue(9996);
 
 newTree.prettyPrint();
 
@@ -347,3 +386,5 @@ console.log(newTree.preorder());
 console.log(newTree.inorder());
 
 console.log(newTree.postorder());
+
+console.log(newTree.height());
