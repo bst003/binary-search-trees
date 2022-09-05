@@ -335,6 +335,8 @@ const Tree = () => {
         return newMax;
     };
 
+    const depth = () => {};
+
     return {
         logTree,
         buildTree,
@@ -347,6 +349,7 @@ const Tree = () => {
         preorder,
         postorder,
         height,
+        depth,
     };
 };
 
