@@ -22,6 +22,7 @@
         "import/prefer-default-export": "off",
         "consistent-return": "off",
         "prefer-destructuring": "off",
+        "no-use-before-define": "off",
         "quotes": ["error", "double"],
         "indent": ["error", 4]
     }

@@ -248,6 +248,29 @@ const Tree = () => {
         }
     };
 
+    const inorder = () => {};
+
+    const preorder = (
+        node = tree.root,
+        valArray = [],
+        func = (value) => {
+            valArray.push(value);
+        }
+    ) => {
+        if (node === null) {
+            return;
+        }
+
+        valArray.push(node.value);
+
+        preorder(node.left, valArray);
+        preorder(node.right, valArray);
+
+        return valArray;
+    };
+
+    const postorder = () => {};
+
     return {
         logTree,
         buildTree,
@@ -256,6 +279,9 @@ const Tree = () => {
         deleteValue,
         findValue,
         levelOrder,
+        inorder,
+        preorder,
+        postorder,
     };
 };
 
@@ -283,3 +309,5 @@ newTree.prettyPrint();
 // console.log(newTree.findValue(3));
 
 console.log(newTree.levelOrder());
+
+console.log(newTree.preorder());
