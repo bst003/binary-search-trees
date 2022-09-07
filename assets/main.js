@@ -358,12 +358,12 @@ const Tree = () => {
     const isBalanced = (node = tree.root) => {
         let lftHeight = 0;
         if (node.left !== null) {
-            lftHeight = height(node.left);
+            lftHeight = height(node.left) + 1;
         }
 
         let rhtHeight = 0;
         if (node.right !== null) {
-            rhtHeight = height(node.right);
+            rhtHeight = height(node.right) + 1;
         }
 
         const heightDiff = lftHeight - rhtHeight;
@@ -448,3 +448,5 @@ newTree.insertValue(4459);
 newTree.prettyPrint();
 
 console.log(newTree.isBalanced());
+
+console.log(newTree.isBalanced(newTree.tree.root.left.left));
