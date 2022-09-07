@@ -356,11 +356,22 @@ const Tree = () => {
     };
 
     const isBalanced = (node = tree.root) => {
-        const lftHeight = height(node.left);
-        const rhtHeight = height(node.right);
+        let lftHeight = 0;
+        if (node.left !== null) {
+            lftHeight = height(node.left);
+        }
 
-        console.log(lftHeight);
-        console.log(rhtHeight);
+        let rhtHeight = 0;
+        if (node.right !== null) {
+            rhtHeight = height(node.right);
+        }
+
+        const heightDiff = lftHeight - rhtHeight;
+
+        if (Math.abs(heightDiff) <= 1) {
+            return true;
+        }
+        return false;
     };
 
     return {
