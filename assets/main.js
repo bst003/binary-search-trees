@@ -355,6 +355,14 @@ const Tree = () => {
         return nodeDepth;
     };
 
+    const isBalanced = (node = tree.root) => {
+        const lftHeight = height(node.left);
+        const rhtHeight = height(node.right);
+
+        console.log(lftHeight);
+        console.log(rhtHeight);
+    };
+
     return {
         tree,
         logTree,
@@ -369,6 +377,7 @@ const Tree = () => {
         postorder,
         height,
         depth,
+        isBalanced,
     };
 };
 
@@ -416,3 +425,15 @@ console.log(newTree.height(newTree.tree.root.left.left.right.left));
 console.log(newTree.depth(newTree.tree.root.left.left.right.left));
 
 console.log(newTree.depth());
+
+console.log(newTree.isBalanced());
+
+newTree.insertValue(4457);
+
+newTree.insertValue(4458);
+
+newTree.insertValue(4459);
+
+newTree.prettyPrint();
+
+console.log(newTree.isBalanced());
