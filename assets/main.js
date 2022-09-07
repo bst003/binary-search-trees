@@ -401,65 +401,93 @@ const Tree = () => {
     };
 };
 
-const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const driver = (() => {
+    const _getRandNum = (max) => Math.floor(Math.random() * max);
 
-const newTree = Tree();
+    const _generateArray = () => {
+        const array = [];
 
-newTree.buildTree(testArray);
+        while (array.length < 10) {
+            const value = _getRandNum(100);
+
+            array.push(value);
+        }
+
+        return array;
+    };
+
+    const run = () => {
+        const valArray = _generateArray();
+
+        console.log(valArray);
+    };
+
+    return {
+        run,
+    };
+})();
+
+// const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+
+// const newTree = Tree();
+
+// newTree.buildTree(testArray);
 
 // newTree.logTree();
 
-newTree.prettyPrint();
+// newTree.prettyPrint();
 
-newTree.insertValue(2);
+// newTree.insertValue(2);
 
-newTree.insertValue(4456);
+// newTree.insertValue(4456);
 
-newTree.insertValue(9999);
+// newTree.insertValue(9999);
 
-newTree.insertValue(9996);
+// newTree.insertValue(9996);
 
-newTree.prettyPrint();
+// newTree.prettyPrint();
 
 // newTree.logTree();
 
-newTree.deleteValue(67);
+// newTree.deleteValue(67);
 // newTree.deleteValue(2);
 
-newTree.prettyPrint();
+// newTree.prettyPrint();
 
 // console.log(newTree.findValue(3));
 
-console.log(newTree.levelOrder());
+// console.log(newTree.levelOrder());
 
-console.log(newTree.preorder());
+// console.log(newTree.preorder());
 
-console.log(newTree.inorder());
+// console.log(newTree.inorder());
 
-console.log(newTree.postorder());
+// console.log(newTree.postorder());
 
-console.log(newTree.height());
+// console.log(newTree.height());
 
-console.log(newTree.height(newTree.tree.root.left.left.right.left));
+// console.log(newTree.height(newTree.tree.root.left.left.right.left));
 
-console.log(newTree.depth(newTree.tree.root.left.left.right.left));
+// console.log(newTree.depth(newTree.tree.root.left.left.right.left));
 
-console.log(newTree.depth());
+// console.log(newTree.depth());
 
-console.log(newTree.isBalanced());
+// console.log(newTree.isBalanced());
 
-newTree.insertValue(4457);
+// newTree.insertValue(4457);
 
-newTree.insertValue(4458);
+// newTree.insertValue(4458);
 
-newTree.insertValue(4459);
+// newTree.insertValue(4459);
 
-newTree.prettyPrint();
+// newTree.prettyPrint();
 
-console.log(newTree.isBalanced());
+// console.log(newTree.isBalanced());
 
-console.log(newTree.isBalanced(newTree.tree.root.left.left));
+// console.log(newTree.isBalanced(newTree.tree.root.left.left));
 
-newTree.rebalance();
+// newTree.rebalance();
 
-newTree.prettyPrint();
+// newTree.prettyPrint();
+
+driver.run();
