@@ -12,7 +12,6 @@
     },
     "rules": {
         "no-console": "off",
-        "no-plusplus": "off",
         "no-underscore-dangle": "off",
         "no-unused-vars": "off",
         "operator-linebreak": "off",

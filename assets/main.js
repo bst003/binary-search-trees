@@ -69,6 +69,40 @@ const Tree = () => {
         return newNode;
     };
 
+    const _subHeight = (node = tree.root, maxHeight = 0, tmpHeight = 0) => {
+        let newMax = maxHeight;
+        let newTmp = tmpHeight;
+
+        if (node === null) {
+            newTmp = 0;
+            return;
+        }
+
+        newTmp += 1;
+        if (newTmp > maxHeight) {
+            newMax = newTmp;
+        }
+
+        // console.log(node.value);
+        // console.log(`max: ${newMax}`);
+        // console.log(`tmp: ${newTmp}`);
+
+        const lftHeight = _subHeight(node.left, newMax, newTmp);
+        const rhtHeight = _subHeight(node.right, newMax, newTmp);
+
+        if (lftHeight > newMax) {
+            newMax = lftHeight;
+        }
+
+        if (rhtHeight > newMax) {
+            newMax = rhtHeight;
+        }
+
+        // console.log(`new max: ${newMax}`);
+
+        return newMax;
+    };
+
     const logTree = () => {
         console.log(tree);
     };
@@ -303,41 +337,26 @@ const Tree = () => {
         return valArray;
     };
 
-    const height = (node = tree.root, maxHeight = 0, tmpHeight = 0) => {
-        let newMax = maxHeight;
-        let newTmp = tmpHeight;
+    const height = (node = tree.root) => {
+        const nodeHeight = _subHeight(node) - 1;
 
-        if (node === null) {
-            newTmp = 0;
-            return newMax;
-        }
-
-        newTmp++;
-        if (newTmp > maxHeight) {
-            newMax = newTmp;
-        }
-
-        console.log(node.value);
-        console.log(`max: ${newMax}`);
-        console.log(`tmp: ${newTmp}`);
-
-        const lftHeight = height(node.left, newMax, newTmp);
-        const rhtHeight = height(node.right, newMax, newTmp);
-
-        if (lftHeight > newMax) {
-            newMax = lftHeight;
-        }
-
-        if (rhtHeight > newMax) {
-            newMax = rhtHeight;
-        }
-
-        return newMax;
+        return nodeHeight;
     };
 
-    const depth = () => {};
+    const depth = (node = tree.root) => {
+        const treeHeight = height(tree.root);
+        const nodeHeight = height(node);
+
+        // console.log(`tree height: ${treeHeight}`);
+        // console.log(`node height: ${nodeHeight}`);
+
+        const nodeDepth = treeHeight - nodeHeight;
+
+        return nodeDepth;
+    };
 
     return {
+        tree,
         logTree,
         buildTree,
         prettyPrint,
@@ -391,3 +410,9 @@ console.log(newTree.inorder());
 console.log(newTree.postorder());
 
 console.log(newTree.height());
+
+console.log(newTree.height(newTree.tree.root.left.left.right.left));
+
+console.log(newTree.depth(newTree.tree.root.left.left.right.left));
+
+console.log(newTree.depth());
