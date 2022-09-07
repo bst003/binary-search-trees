@@ -374,6 +374,14 @@ const Tree = () => {
         return false;
     };
 
+    const rebalance = () => {
+        const valArray = inorder(tree.root);
+
+        tree.root = {};
+
+        buildTree(valArray);
+    };
+
     return {
         tree,
         logTree,
@@ -389,6 +397,7 @@ const Tree = () => {
         height,
         depth,
         isBalanced,
+        rebalance,
     };
 };
 
@@ -450,3 +459,7 @@ newTree.prettyPrint();
 console.log(newTree.isBalanced());
 
 console.log(newTree.isBalanced(newTree.tree.root.left.left));
+
+newTree.rebalance();
+
+newTree.prettyPrint();
