@@ -129,7 +129,7 @@ const Tree = () => {
         array.sort((a, b) => a - b);
         const reducedArray = _removeDuplicates(array);
 
-        console.log(reducedArray);
+        // console.log(reducedArray);
 
         tree.root = _subBuildTree(reducedArray, 0, reducedArray.length - 1);
 
@@ -407,7 +407,7 @@ const driver = (() => {
     const _generateArray = () => {
         const array = [];
 
-        while (array.length < 10) {
+        while (array.length <= 10) {
             const value = _getRandNum(100);
 
             array.push(value);
@@ -419,7 +419,47 @@ const driver = (() => {
     const run = () => {
         const valArray = _generateArray();
 
-        console.log(valArray);
+        // console.log(valArray);
+
+        const driverTree = Tree();
+
+        driverTree.buildTree(valArray);
+
+        driverTree.prettyPrint();
+
+        console.log(`tree balanced: ${driverTree.isBalanced()}`);
+
+        console.log(driverTree.levelOrder());
+
+        console.log(driverTree.preorder());
+
+        console.log(driverTree.inorder());
+
+        console.log(driverTree.postorder());
+
+        driverTree.insertValue(104);
+
+        driverTree.insertValue(110);
+
+        driverTree.insertValue(190);
+
+        driverTree.prettyPrint();
+
+        console.log(`tree balanced: ${driverTree.isBalanced()}`);
+
+        driverTree.rebalance();
+
+        driverTree.prettyPrint();
+
+        console.log(`tree balanced: ${driverTree.isBalanced()}`);
+
+        console.log(driverTree.levelOrder());
+
+        console.log(driverTree.preorder());
+
+        console.log(driverTree.inorder());
+
+        console.log(driverTree.postorder());
     };
 
     return {
